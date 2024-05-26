@@ -5,6 +5,7 @@ import QtQuick.Controls 2.15
 import QtLocation 5.15
 import QtPositioning 5.15
 import com.example
+import inference.example
 
 ApplicationWindow {
     visible: true
@@ -40,6 +41,21 @@ ApplicationWindow {
             plugin: mapPlugin
             center: QtPositioning.coordinate(39.9917, 116.3055)
             zoomLevel: 14
+            //索引
+            Image {
+                    source: "qrc:/Inference.png"
+                    width: 40
+                    height: 40
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    anchors.margins: 10
+                    MouseArea {
+                                anchors.fill: parent
+                                onClicked: {
+                                    myInference.showInference()
+                                }
+                            }
+                }
 
             PinchHandler {
                 id: pinch
@@ -131,7 +147,7 @@ ApplicationWindow {
 
                                 // 创建弹出窗口
                                 infoWindow = Qt.createComponent("qrc:/InfoMindow.qml").createObject(map);
-                                if(infoWindow) console.log("ha")
+
                                 // 设置InfoWindow的属性
                                 infoWindow.locationName = locationName;
                                 infoWindow.description = description;
