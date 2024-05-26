@@ -70,12 +70,12 @@ ApplicationWindow {
                 sequence: StandardKey.ZoomOut
                 onActivated: map.zoomLevel = Math.round(map.zoomLevel - 1)
             }
-
+            //餐馆图标
             MapItemView {
                 model: ListModel {
                     ListElement { name: "Point A"; latitude: 39.9917; longitude: 116.3055 }
                     ListElement { name: "Point B"; latitude: 39.995; longitude: 116.31 }
-                    // 添加更多点的名称和坐标
+                    // 添加更多点的名称和坐标,通过经纬度定位（还需要在locationManager.cpp中添加信息
                 }
 
                 delegate: MapQuickItem {
@@ -100,7 +100,8 @@ ApplicationWindow {
                                 infoWindow = null; // 清空引用
                             } else {
                                 // 获取被点击的地点信息
-                                var loc = locationManager.getLocationByName(name);
+                                //交互方式：点击->位置坐标信息->地点名->通过locationManageer.cpp中的getLocationByName函数对应到某一特定location->获得location的其他信息
+                                var loc = locationManager.getLocationByName(name);//loationManager在.cpp和.h文件中实现
 
                                 // 访问位置属性
                                 var locationName = loc["name"].toString();
@@ -129,6 +130,7 @@ ApplicationWindow {
                     }
                 }
             }
+            //门图标
             MapItemView {
                 model: ListModel {
                     ListElement { name: "东南门"; latitude: 39.98880918384113; longitude: 116.30965965926265 }
@@ -137,7 +139,6 @@ ApplicationWindow {
                     ListElement { name: "南门"; latitude: 39.98516361992511; longitude: 116.30556125566841 }
                     ListElement { name: "西南门"; latitude: 39.98646328742977; longitude: 116.29941325333175 }
 
-                    // 添加更多点的名称和坐标
                 }
 
                 delegate: MapQuickItem {
