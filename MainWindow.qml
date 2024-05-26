@@ -12,6 +12,19 @@ ApplicationWindow {
     height: 480
     title: qsTr("寻味燕园周边")
 
+    // 计算两个地点之间的真实距离（单位：米）
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        // 将经纬度转换为 QtPositioning.coordinate 对象
+        var coord1 = QtPositioning.coordinate(lat1, lon1);
+        var coord2 = QtPositioning.coordinate(lat2, lon2);
+
+        // 使用 distanceTo() 函数计算两个坐标之间的距离
+        var distance = coord1.distanceTo(coord2);
+        var roundedDistance = Math.round(distance);
+
+           return roundedDistance;
+    }
+
     Rectangle {
         width: parent.width
         height: parent.height
@@ -109,6 +122,12 @@ ApplicationWindow {
                                 var description = loc["description"].toString();
                                 var category = loc["category"].toString();
                                 var rating = loc["rating"].toString();
+                                var distance_to_EastDoor = calculateDistance(latitude, longitude, 39.99077617354559, 116.30950388042686).toString();
+                                var distance_to_WestDoor = calculateDistance(latitude, longitude, 39.99265519209038, 116.29849828684394).toString();
+                                var distance_to_SouthDoor = calculateDistance(latitude, longitude, 39.98516361992511, 116.30556125566841).toString();
+                                var distance_to_SouthEastDoor = calculateDistance(latitude, longitude, 39.98880918384113, 116.30556125566841).toString();
+                                var distance_to_SouthwestDoor = calculateDistance(latitude, longitude, 39.98646328742977, 116.29941325333175).toString();
+
 
                                 // 创建弹出窗口
                                 infoWindow = Qt.createComponent("qrc:/InfoMindow.qml").createObject(map);
@@ -118,6 +137,12 @@ ApplicationWindow {
                                 infoWindow.description = description;
                                 infoWindow.category = category;
                                 infoWindow.rating = rating;
+                                infoWindow.distance_to_EastDoor = distance_to_EastDoor;
+                                infoWindow.distance_to_WestDoor = distance_to_WestDoor;
+                                infoWindow.distance_to_SouthDoor = distance_to_SouthDoor;
+                                infoWindow.distance_to_SouthEastDoor = distance_to_SouthEastDoor;
+                                infoWindow.distance_to_SouthWestDoor = distance_to_SouthwestDoor;
+
 
                                 // 设置弹出窗口位置
                                 var point = map.fromCoordinate(QtPositioning.coordinate(latitude, longitude));
@@ -152,6 +177,7 @@ ApplicationWindow {
                     }
                 }
             }
+
         }
 
 
