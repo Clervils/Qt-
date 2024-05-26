@@ -918,7 +918,7 @@ qrc_image3.cpp: ../../image3.qrc \
 
 qrc_qml.cpp: ../../qml.qrc \
 		../../../Qt/6.7.0/macos/libexec/rcc \
-		../../infoWindow.qml \
+		../../InfoMindow.qml \
 		../../MainWindow.qml
 	/Users/haha/Qt/6.7.0/macos/libexec/rcc -name qml --no-zstd ../../qml.qrc -o qrc_qml.cpp
 

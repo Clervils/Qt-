@@ -1,4 +1,4 @@
-//MainWindow.qml
+// MainWindow.qml
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15
@@ -84,10 +84,11 @@ ApplicationWindow {
                     anchorPoint.y: image.height
 
                     sourceItem: Image {
-                        id: image
-                        source: "qrc:/restaurant.png" // 使用自定义的标记图像
-                        sourceSize.width: 20 // 设置图像宽度为20像素
-                        sourceSize.height: 20 // 设置图像高度为20像素
+                            id: image
+                            source: "qrc:/restaurant.png" // 使用自定义的标记图像
+                            sourceSize.width: 20 // 设置图像宽度为20像素
+                            sourceSize.height: 20 // 设置图像高度为20像素
+
                     }
 
                     property var infoWindow; // 将infoWindow声明为属性
@@ -95,6 +96,7 @@ ApplicationWindow {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
+                            //再点击一次窗口消失
                             if (infoWindow) {
                                 infoWindow.destroy(); // 销毁窗口
                                 infoWindow = null; // 清空引用
@@ -103,28 +105,24 @@ ApplicationWindow {
                                 //交互方式：点击->位置坐标信息->地点名->通过locationManageer.cpp中的getLocationByName函数对应到某一特定location->获得location的其他信息
                                 var loc = locationManager.getLocationByName(name);//loationManager在.cpp和.h文件中实现
 
-                                // 访问位置属性
                                 var locationName = loc["name"].toString();
                                 var description = loc["description"].toString();
                                 var category = loc["category"].toString();
                                 var rating = loc["rating"].toString();
 
                                 // 创建弹出窗口
-                                infoWindow = Qt.createQmlObject(
-                                    // QML 源字符串用于 infoWindow
-                                    'import QtQuick 2.15; import QtQuick.Controls 2.15; import QtQuick.Layouts 1.3; Item { width: 200; height: 100; Rectangle { color: "white"; border.color: "black"; anchors.centerIn: parent; ColumnLayout { anchors.fill: parent; Text { text: "' + locationName + '" } Text { text: "Description: ' + description + '" } Text { text: "Category: ' + category + '" } Text { text: "Rating: ' + rating + '" } } } }',
-                                    // infoWindow 的父对象
-                                    map,
-                                    // 存储 infoWindow 对象的变量名
-                                    "infoWindow"
-                                );
+                                infoWindow = Qt.createComponent("qrc:/InfoMindow.qml").createObject(map);
+                                if(infoWindow) console.log("ha")
+                                // 设置InfoWindow的属性
+                                infoWindow.locationName = locationName;
+                                infoWindow.description = description;
+                                infoWindow.category = category;
+                                infoWindow.rating = rating;
 
                                 // 设置弹出窗口位置
-                                if (infoWindow) {
-                                    var point = map.fromCoordinate(QtPositioning.coordinate(latitude, longitude));
-                                    infoWindow.x = point.x - infoWindow.width / 2 + 10;
-                                    infoWindow.y = point.y - infoWindow.height - 5;
-                                }
+                                var point = map.fromCoordinate(QtPositioning.coordinate(latitude, longitude));
+                                infoWindow.x = point.x - infoWindow.width / 2 + 10;
+                                infoWindow.y = point.y - infoWindow.height - 5;
                             }
                         }
                     }
