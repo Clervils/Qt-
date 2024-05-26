@@ -6,8 +6,6 @@ import QtLocation 5.15
 import QtPositioning 5.15
 import com.example
 
-
-
 ApplicationWindow {
     visible: true
     width: 640
@@ -74,57 +72,108 @@ ApplicationWindow {
             }
 
             MapItemView {
-                        model: ListModel {
-                            ListElement { name: "Point A"; latitude: 39.9917; longitude: 116.3055 }
-                            ListElement { name: "Point B"; latitude: 39.995; longitude: 116.31 }
-                            // 添加更多点的名称和坐标
-                        }
+                model: ListModel {
+                    ListElement { name: "Point A"; latitude: 39.9917; longitude: 116.3055 }
+                    ListElement { name: "Point B"; latitude: 39.995; longitude: 116.31 }
+                    // 添加更多点的名称和坐标
+                }
 
-                        delegate: MapQuickItem {
-                            coordinate: QtPositioning.coordinate(model.latitude, model.longitude)
-                            anchorPoint.x: image.width / 2
-                            anchorPoint.y: image.height
+                delegate: MapQuickItem {
+                    coordinate: QtPositioning.coordinate(latitude, longitude)
+                    anchorPoint.x: image.width / 2
+                    anchorPoint.y: image.height
 
-                            sourceItem: Image {
-                                id: image
-                                source: "qrc:/restaurant.png" // 使用自定义的标记图像
-                                sourceSize.width: 20 // 设置图像宽度为20像素
-                                sourceSize.height: 20 // 设置图像高度为20像素
-                            }
+                    sourceItem: Image {
+                        id: image
+                        source: "qrc:/restaurant.png" // 使用自定义的标记图像
+                        sourceSize.width: 20 // 设置图像宽度为20像素
+                        sourceSize.height: 20 // 设置图像高度为20像素
+                    }
 
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: {
-                                                // 获取被点击的地点信息
-                                                console.log("Clicked model:", model.name);
-                                                var loc = locationManager.getLocationByName(model.name);
+                    property var infoWindow; // 将infoWindow声明为属性
 
-                                                // 访问位置属性
-                                                var locationName = loc["name"].toString();
-                                                var description = loc["description"].toString();
-                                                var category = loc["category"].toString();
-                                                var rating = loc["rating"].toString();
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            if (infoWindow) {
+                                infoWindow.destroy(); // 销毁窗口
+                                infoWindow = null; // 清空引用
+                            } else {
+                                // 获取被点击的地点信息
+                                var loc = locationManager.getLocationByName(name);
 
-                                                // 创建弹出窗口
-                                                var infoWindow = Qt.createQmlObject(
-                                                    'import QtQuick 2.15; import QtQuick.Controls 2.15; import QtQuick.Layouts 1.3; Item { width: 200; height: 100; Rectangle { color: "white"; border.color: "black"; anchors.centerIn: parent; ColumnLayout { anchors.fill: parent; Text { text: "' + locationName + '" } Text { text: "Description: ' + description + '" } Text { text: "Category: ' + category + '" } Text { text: "Rating: ' + rating + '" } } } }',
-                                                    map,
-                                                    "infoWindow"
-                                                );
+                                // 访问位置属性
+                                var locationName = loc["name"].toString();
+                                var description = loc["description"].toString();
+                                var category = loc["category"].toString();
+                                var rating = loc["rating"].toString();
 
-                                                // 设置弹出窗口位置
-                                                if (infoWindow) {
-                                                    infoWindow.x = (map.width - infoWindow.width) / 2;
-                                                    infoWindow.y = (map.height - infoWindow.height) / 2;
-                                                }
+                                // 创建弹出窗口
+                                infoWindow = Qt.createQmlObject(
+                                    // QML 源字符串用于 infoWindow
+                                    'import QtQuick 2.15; import QtQuick.Controls 2.15; import QtQuick.Layouts 1.3; Item { width: 200; height: 100; Rectangle { color: "white"; border.color: "black"; anchors.centerIn: parent; ColumnLayout { anchors.fill: parent; Text { text: "' + locationName + '" } Text { text: "Description: ' + description + '" } Text { text: "Category: ' + category + '" } Text { text: "Rating: ' + rating + '" } } } }',
+                                    // infoWindow 的父对象
+                                    map,
+                                    // 存储 infoWindow 对象的变量名
+                                    "infoWindow"
+                                );
+
+                                // 设置弹出窗口位置
+                                if (infoWindow) {
+                                    var point = map.fromCoordinate(QtPositioning.coordinate(latitude, longitude));
+                                    infoWindow.x = point.x - infoWindow.width / 2 + 10;
+                                    infoWindow.y = point.y - infoWindow.height - 5;
                                 }
                             }
                         }
+                    }
+                }
             }
+            MapItemView {
+                model: ListModel {
+                    ListElement { name: "东南门"; latitude: 39.98880918384113; longitude: 116.30965965926265 }
+                    ListElement { name: "东门"; latitude: 39.99077617354559; longitude: 116.30950388042686 }
+                    ListElement { name: "西门"; latitude:  39.99265519209038; longitude: 116.29849828684394 }
+                    ListElement { name: "南门"; latitude: 39.98516361992511; longitude: 116.30556125566841 }
+                    ListElement { name: "西南门"; latitude: 39.98646328742977; longitude: 116.29941325333175 }
 
+                    // 添加更多点的名称和坐标
+                }
 
+                delegate: MapQuickItem {
+                    coordinate: QtPositioning.coordinate(latitude, longitude)
+                    anchorPoint.x: image2.width / 2
+                    anchorPoint.y: image2.height
+
+                    sourceItem: Image {
+                        id: image2
+                        source: "qrc:/door.png" // 使用自定义的标记图像
+                        sourceSize.width: 20 // 设置图像宽度为20像素
+                        sourceSize.height: 20 // 设置图像高度为20像素
+                    }
+                }
+            }
         }
 
+
+        //指南针
+        Image {
+                    id: compassImage
+                    source: "qrc:/COMPASS.png" // 指南针图像
+                    width: 50
+                    height: 50
+                    anchors {
+                        top: parent.top
+                        right: parent.right
+                        topMargin: 10
+                        rightMargin: 10
+                    }
+                    transform: Rotation {
+                        origin.x: compassImage.width / 2
+                        origin.y: compassImage.height / 2
+                        angle: -map.bearing // 反转地图的旋转角度
+                    }
+        }
 
         MapCircle {
             id: circle
@@ -155,10 +204,8 @@ ApplicationWindow {
               longitudeSave = longitude
               var newCenter = QtPositioning.coordinate(latitude, longitude)
               map.center = newCenter
-              console.log("latitude=" + latitude + " longitude=" + longitude);
+              console.log("latitude=" + latitude + " longitude=" + longitude);
             }
-
         }
     }
-
 }

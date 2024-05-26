@@ -55,6 +55,8 @@ OBJECTS_DIR   = ./
 SOURCES       = ../../locationmanager.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp qrc_image.cpp \
+		qrc_image2.cpp \
+		qrc_image3.cpp \
 		qrc_qml.cpp \
 		moc_locationmanager.cpp \
 		moc_mainwindow.cpp
@@ -62,6 +64,8 @@ OBJECTS       = locationmanager.o \
 		main.o \
 		mainwindow.o \
 		qrc_image.o \
+		qrc_image2.o \
+		qrc_image3.o \
 		qrc_qml.o \
 		moc_locationmanager.o \
 		moc_mainwindow.o
@@ -567,6 +571,8 @@ Makefile: ../../FindRestaurantAroundPKU.pro ../../../Qt/6.7.0/macos/mkspecs/feat
 		../../../Qt/6.7.0/macos/mkspecs/features/lex.prf \
 		../../FindRestaurantAroundPKU.pro \
 		../../image.qrc \
+		../../image2.qrc \
+		../../image3.qrc \
 		../../qml.qrc \
 		../../../Qt/6.7.0/macos/lib/QtQuickWidgets.framework/Resources/QtQuickWidgets.prl \
 		../../../Qt/6.7.0/macos/lib/QtLocation.framework/Resources/QtLocation.prl \
@@ -821,6 +827,8 @@ Makefile: ../../FindRestaurantAroundPKU.pro ../../../Qt/6.7.0/macos/mkspecs/feat
 ../../../Qt/6.7.0/macos/mkspecs/features/lex.prf:
 ../../FindRestaurantAroundPKU.pro:
 ../../image.qrc:
+../../image2.qrc:
+../../image3.qrc:
 ../../qml.qrc:
 ../../../Qt/6.7.0/macos/lib/QtQuickWidgets.framework/Resources/QtQuickWidgets.prl:
 ../../../Qt/6.7.0/macos/lib/QtLocation.framework/Resources/QtLocation.prl:
@@ -860,7 +868,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../../image.qrc ../../qml.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents ../../image.qrc ../../image2.qrc ../../image3.qrc ../../qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../locationmanager.h ../../mainwindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../../locationmanager.cpp ../../main.cpp ../../mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../mainwindow.ui $(DISTDIR)/
@@ -890,16 +898,27 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_image.cpp qrc_qml.cpp
+compiler_rcc_make_all: qrc_image.cpp qrc_image2.cpp qrc_image3.cpp qrc_qml.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_image.cpp qrc_qml.cpp
+	-$(DEL_FILE) qrc_image.cpp qrc_image2.cpp qrc_image3.cpp qrc_qml.cpp
 qrc_image.cpp: ../../image.qrc \
 		../../../Qt/6.7.0/macos/libexec/rcc \
 		../../restaurant.png
 	/Users/haha/Qt/6.7.0/macos/libexec/rcc -name image --no-zstd ../../image.qrc -o qrc_image.cpp
 
+qrc_image2.cpp: ../../image2.qrc \
+		../../../Qt/6.7.0/macos/libexec/rcc \
+		../../COMPASS.png
+	/Users/haha/Qt/6.7.0/macos/libexec/rcc -name image2 --no-zstd ../../image2.qrc -o qrc_image2.cpp
+
+qrc_image3.cpp: ../../image3.qrc \
+		../../../Qt/6.7.0/macos/libexec/rcc \
+		../../door.png
+	/Users/haha/Qt/6.7.0/macos/libexec/rcc -name image3 --no-zstd ../../image3.qrc -o qrc_image3.cpp
+
 qrc_qml.cpp: ../../qml.qrc \
 		../../../Qt/6.7.0/macos/libexec/rcc \
+		../../infoWindow.qml \
 		../../MainWindow.qml
 	/Users/haha/Qt/6.7.0/macos/libexec/rcc -name qml --no-zstd ../../qml.qrc -o qrc_qml.cpp
 
@@ -955,7 +974,12 @@ main.o: ../../main.cpp ../../../Qt/6.7.0/macos/lib/QtGui.framework/Headers/QGuiA
 		../../../Qt/6.7.0/macos/lib/QtQml.framework/Headers/QQmlApplicationEngine \
 		../../../Qt/6.7.0/macos/lib/QtQml.framework/Headers/qqmlapplicationengine.h \
 		../../../Qt/6.7.0/macos/lib/QtQml.framework/Headers/QQmlContext \
-		../../../Qt/6.7.0/macos/lib/QtQml.framework/Headers/qqmlcontext.h
+		../../../Qt/6.7.0/macos/lib/QtQml.framework/Headers/qqmlcontext.h \
+		../../LocationManager.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QVariant \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qvariant.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
@@ -966,6 +990,12 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 
 qrc_image.o: qrc_image.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_image.o qrc_image.cpp
+
+qrc_image2.o: qrc_image2.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_image2.o qrc_image2.cpp
+
+qrc_image3.o: qrc_image3.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_image3.o qrc_image3.cpp
 
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp
