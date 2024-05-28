@@ -9,8 +9,8 @@ import inference.example
 
 ApplicationWindow {
     visible: true
-    width: 640
-    height: 480
+    width: 1000
+    height: 800
     title: qsTr("寻味燕园周边")
 
     // 计算两个地点之间的真实距离（单位：米）
