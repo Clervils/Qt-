@@ -5,8 +5,6 @@ RatingWidget::RatingWidget(QWidget *parent) : QWidget(parent)
     layout = new QHBoxLayout(this);
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
-    //qDebug() << "ha";
-    qDebug() << "Pixmap size:" << QPixmap(":/ratingstar.jpg").size();
     for (int i = 0; i < 5; ++i) {
         QLabel *starLabel = new QLabel(this);
         QPixmap starPixmap(":/ratingstar.jpg");

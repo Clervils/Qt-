@@ -6,8 +6,8 @@ import rating.example
 
 Item {
     id: infoWindow
-    width: 250
-    height: 220
+    width: 280
+    height: 340
 
     property string locationName
     property string description
@@ -22,30 +22,67 @@ Item {
     Rectangle {
         color: "white"
         border.color: "black"
+        border.width:1
+        radius: 10
         anchors.fill: parent
         anchors.margins: 10
 
         ColumnLayout {
             anchors.fill: parent
-            spacing: 5
-            Text { text: " " + infoWindow.locationName }
-            Text { text: " 描述: " + infoWindow.description }
-            Text { text: " 类别: " + infoWindow.category }
-            RowLayout {
-                            Text { text: " 评分: " + infoWindow.rating }
-                            Button {
-                                text: "我要评分"
-                                onClicked: {
-                                    myratingbutton.showRating()
-                                }
-                                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                            }
+            spacing: 6
+            Text {
+                text: "  " + infoWindow.locationName
+                font.bold: true
+                font.pointSize: 16
             }
-            Text { text: " 离东门: " + infoWindow.distance_to_EastDoor + " m" }
-            Text { text: " 离西门: " + infoWindow.distance_to_WestDoor + " m" }
-            Text { text: " 离南门: " + infoWindow.distance_to_SouthDoor + " m"}
-            Text { text: " 离东南门: " + infoWindow.distance_to_SouthEastDoor + " m" }
-            Text { text: " 离西南门: " + infoWindow.distance_to_SouthWestDoor + " m" }
+            RowLayout {
+                spacing: 5
+                Text {
+                    text: "   描述: "
+                    font.bold: true
+                }
+                Text {
+                    text: infoWindow.description
+                }
+            }
+            RowLayout {
+                spacing: 5
+                Text {
+                    text: "   类别: "
+                    font.bold: true
+                }
+                Text {
+                    text: infoWindow.category
+                }
+            }
+            RowLayout {
+                spacing: 5
+                Text {
+                    text: "   评分: "
+                    font.bold: true
+                }
+                Text {
+                    text: infoWindow.rating
+                }
+                Button {
+                        text: "我要评分"
+                        onClicked: {
+                            myratingbutton.showRating()
+                        }
+                        Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                }
+            }
+            Text {
+                text: "  离各个门的距离"
+                font.bold: true
+                font.pointSize: 16
+            }
+            Text { text: "  离东门: " + infoWindow.distance_to_EastDoor + " m" }
+            Text { text: "  离西门: " + infoWindow.distance_to_WestDoor + " m" }
+            Text { text: "  离南门: " + infoWindow.distance_to_SouthDoor + " m"}
+            Text { text: "  离东南门: " + infoWindow.distance_to_SouthEastDoor + " m" }
+            Text { text: "  离西南门: " + infoWindow.distance_to_SouthWestDoor + " m" }
+            Text { text: "  " }
         }
 
     }
