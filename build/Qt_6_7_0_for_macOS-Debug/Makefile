@@ -56,29 +56,41 @@ SOURCES       = ../../indexes.cpp \
 		../../inference.cpp \
 		../../locationmanager.cpp \
 		../../main.cpp \
-		../../mainwindow.cpp qrc_image.cpp \
+		../../mainwindow.cpp \
+		../../rating.cpp \
+		../../ratingbutton.cpp qrc_image.cpp \
 		qrc_image2.cpp \
 		qrc_image3.cpp \
 		qrc_image4.cpp \
+		qrc_image5.cpp \
+		qrc_image6.cpp \
 		qrc_qml.cpp \
 		moc_indexes.cpp \
 		moc_inference.cpp \
 		moc_locationmanager.cpp \
-		moc_mainwindow.cpp
+		moc_mainwindow.cpp \
+		moc_rating.cpp \
+		moc_ratingbutton.cpp
 OBJECTS       = indexes.o \
 		inference.o \
 		locationmanager.o \
 		main.o \
 		mainwindow.o \
+		rating.o \
+		ratingbutton.o \
 		qrc_image.o \
 		qrc_image2.o \
 		qrc_image3.o \
 		qrc_image4.o \
+		qrc_image5.o \
+		qrc_image6.o \
 		qrc_qml.o \
 		moc_indexes.o \
 		moc_inference.o \
 		moc_locationmanager.o \
-		moc_mainwindow.o
+		moc_mainwindow.o \
+		moc_rating.o \
+		moc_ratingbutton.o
 DIST          = /Qt/6.7.0/macos/mkspecs/features/spec_pre.prf \
 		/Qt/6.7.0/macos/mkspecs/features/device_config.prf \
 		/Qt/6.7.0/macos/mkspecs/common/unix.conf \
@@ -318,11 +330,15 @@ DIST          = /Qt/6.7.0/macos/mkspecs/features/spec_pre.prf \
 		../../../../FindRestaurantAroundPKU.pro ../../indexes.h \
 		../../inference.h \
 		../../locationmanager.h \
-		../../mainwindow.h ../../indexes.cpp \
+		../../mainwindow.h \
+		../../rating.h \
+		../../ratingbutton.h ../../indexes.cpp \
 		../../inference.cpp \
 		../../locationmanager.cpp \
 		../../main.cpp \
-		../../mainwindow.cpp
+		../../mainwindow.cpp \
+		../../rating.cpp \
+		../../ratingbutton.cpp
 QMAKE_TARGET  = FindRestaurantAroundPKU
 DESTDIR       = 
 TARGET        = FindRestaurantAroundPKU.app/Contents/MacOS/FindRestaurantAroundPKU
@@ -588,6 +604,8 @@ Makefile: ../../FindRestaurantAroundPKU.pro ../../../Qt/6.7.0/macos/mkspecs/feat
 		../../image2.qrc \
 		../../image3.qrc \
 		../../image4.qrc \
+		../../image5.qrc \
+		../../image6.qrc \
 		../../qml.qrc \
 		../../../Qt/6.7.0/macos/lib/QtQuickWidgets.framework/Resources/QtQuickWidgets.prl \
 		../../../Qt/6.7.0/macos/lib/QtLocation.framework/Resources/QtLocation.prl \
@@ -845,6 +863,8 @@ Makefile: ../../FindRestaurantAroundPKU.pro ../../../Qt/6.7.0/macos/mkspecs/feat
 ../../image2.qrc:
 ../../image3.qrc:
 ../../image4.qrc:
+../../image5.qrc:
+../../image6.qrc:
 ../../qml.qrc:
 ../../../Qt/6.7.0/macos/lib/QtQuickWidgets.framework/Resources/QtQuickWidgets.prl:
 ../../../Qt/6.7.0/macos/lib/QtLocation.framework/Resources/QtLocation.prl:
@@ -884,9 +904,9 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../../image.qrc ../../image2.qrc ../../image3.qrc ../../image4.qrc ../../qml.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../../indexes.h ../../inference.h ../../locationmanager.h ../../mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../indexes.cpp ../../inference.cpp ../../locationmanager.cpp ../../main.cpp ../../mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../image.qrc ../../image2.qrc ../../image3.qrc ../../image4.qrc ../../image5.qrc ../../image6.qrc ../../qml.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents ../../indexes.h ../../inference.h ../../locationmanager.h ../../mainwindow.h ../../rating.h ../../ratingbutton.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../indexes.cpp ../../inference.cpp ../../locationmanager.cpp ../../main.cpp ../../mainwindow.cpp ../../rating.cpp ../../ratingbutton.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../mainwindow.ui $(DISTDIR)/
 
 
@@ -914,9 +934,9 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_image.cpp qrc_image2.cpp qrc_image3.cpp qrc_image4.cpp qrc_qml.cpp
+compiler_rcc_make_all: qrc_image.cpp qrc_image2.cpp qrc_image3.cpp qrc_image4.cpp qrc_image5.cpp qrc_image6.cpp qrc_qml.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_image.cpp qrc_image2.cpp qrc_image3.cpp qrc_image4.cpp qrc_qml.cpp
+	-$(DEL_FILE) qrc_image.cpp qrc_image2.cpp qrc_image3.cpp qrc_image4.cpp qrc_image5.cpp qrc_image6.cpp qrc_qml.cpp
 qrc_image.cpp: ../../image.qrc \
 		../../../Qt/6.7.0/macos/libexec/rcc \
 		../../restaurant.png
@@ -937,15 +957,25 @@ qrc_image4.cpp: ../../image4.qrc \
 		../../Inference.png
 	/Users/haha/Qt/6.7.0/macos/libexec/rcc -name image4 --no-zstd ../../image4.qrc -o qrc_image4.cpp
 
+qrc_image5.cpp: ../../image5.qrc \
+		../../../Qt/6.7.0/macos/libexec/rcc \
+		../../ratingstar.jpg
+	/Users/haha/Qt/6.7.0/macos/libexec/rcc -name image5 --no-zstd ../../image5.qrc -o qrc_image5.cpp
+
+qrc_image6.cpp: ../../image6.qrc \
+		../../../Qt/6.7.0/macos/libexec/rcc \
+		../../ratingstar2.jpg
+	/Users/haha/Qt/6.7.0/macos/libexec/rcc -name image6 --no-zstd ../../image6.qrc -o qrc_image6.cpp
+
 qrc_qml.cpp: ../../qml.qrc \
 		../../../Qt/6.7.0/macos/libexec/rcc \
 		../../InfoMindow.qml \
 		../../MainWindow.qml
 	/Users/haha/Qt/6.7.0/macos/libexec/rcc -name qml --no-zstd ../../qml.qrc -o qrc_qml.cpp
 
-compiler_moc_header_make_all: moc_indexes.cpp moc_inference.cpp moc_locationmanager.cpp moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_indexes.cpp moc_inference.cpp moc_locationmanager.cpp moc_mainwindow.cpp moc_rating.cpp moc_ratingbutton.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_indexes.cpp moc_inference.cpp moc_locationmanager.cpp moc_mainwindow.cpp
+	-$(DEL_FILE) moc_indexes.cpp moc_inference.cpp moc_locationmanager.cpp moc_mainwindow.cpp moc_rating.cpp moc_ratingbutton.cpp
 moc_indexes.cpp: ../../indexes.h \
 		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
@@ -955,6 +985,10 @@ moc_indexes.cpp: ../../indexes.h \
 		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qcombobox.h \
 		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QListWidget \
 		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qlistwidget.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QMap \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qmap.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qstringlist.h \
 		../../../Qt/6.7.0/macos/libexec/moc
 	/Users/haha/Qt/6.7.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/haha/Qt/6.7.0/macos/mkspecs/macx-clang -I/Users/haha/FindRestaurantAroundPKU -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickWidgets.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtLocation.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtPositioningQuick.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickShapes.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickShapes.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickShapes.framework/Versions/A/Headers/6.7.0/QtQuickShapes -I/Users/haha/Qt/6.7.0/macos/lib/QtQuick.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQuick.framework/Versions/A/Headers/6.7.0/QtQuick -I/Users/haha/Qt/6.7.0/macos/lib/QtQuick.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtOpenGL.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtWidgets.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtGui.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtGui.framework/Versions/A/Headers/6.7.0/QtGui -I/Users/haha/Qt/6.7.0/macos/lib/QtGui.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQmlModels.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQmlModels.framework/Versions/A/Headers/6.7.0/QtQmlModels -I/Users/haha/Qt/6.7.0/macos/lib/QtQmlModels.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQml.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQml.framework/Versions/A/Headers/6.7.0/QtQml -I/Users/haha/Qt/6.7.0/macos/lib/QtQml.framework/Headers -I/Users/haha/Qt/6.7.0/macos/include -I/Users/haha/Qt/6.7.0/macos/include/QtQmlIntegration -I/Users/haha/Qt/6.7.0/macos/lib/QtNetwork.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtPositioning.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtCore.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtCore.framework/Versions/A/Headers/6.7.0/QtCore -I/Users/haha/Qt/6.7.0/macos/lib/QtCore.framework/Headers -I/Users/haha/Qt/6.7.0/macos/include/QtQmlBuiltins/6.7.0 -I/Users/haha/Qt/6.7.0/macos/include/QtQmlBuiltins/6.7.0/QtQmlBuiltins -I/Users/haha/Qt/6.7.0/macos/include/QtQmlBuiltins -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/haha/Qt/6.7.0/macos/lib ../../indexes.h -o moc_indexes.cpp
 
@@ -977,6 +1011,28 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../../Qt/6.7.0/macos/libexec/moc
 	/Users/haha/Qt/6.7.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/haha/Qt/6.7.0/macos/mkspecs/macx-clang -I/Users/haha/FindRestaurantAroundPKU -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickWidgets.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtLocation.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtPositioningQuick.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickShapes.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickShapes.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickShapes.framework/Versions/A/Headers/6.7.0/QtQuickShapes -I/Users/haha/Qt/6.7.0/macos/lib/QtQuick.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQuick.framework/Versions/A/Headers/6.7.0/QtQuick -I/Users/haha/Qt/6.7.0/macos/lib/QtQuick.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtOpenGL.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtWidgets.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtGui.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtGui.framework/Versions/A/Headers/6.7.0/QtGui -I/Users/haha/Qt/6.7.0/macos/lib/QtGui.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQmlModels.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQmlModels.framework/Versions/A/Headers/6.7.0/QtQmlModels -I/Users/haha/Qt/6.7.0/macos/lib/QtQmlModels.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQml.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQml.framework/Versions/A/Headers/6.7.0/QtQml -I/Users/haha/Qt/6.7.0/macos/lib/QtQml.framework/Headers -I/Users/haha/Qt/6.7.0/macos/include -I/Users/haha/Qt/6.7.0/macos/include/QtQmlIntegration -I/Users/haha/Qt/6.7.0/macos/lib/QtNetwork.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtPositioning.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtCore.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtCore.framework/Versions/A/Headers/6.7.0/QtCore -I/Users/haha/Qt/6.7.0/macos/lib/QtCore.framework/Headers -I/Users/haha/Qt/6.7.0/macos/include/QtQmlBuiltins/6.7.0 -I/Users/haha/Qt/6.7.0/macos/include/QtQmlBuiltins/6.7.0/QtQmlBuiltins -I/Users/haha/Qt/6.7.0/macos/include/QtQmlBuiltins -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/haha/Qt/6.7.0/macos/lib ../../mainwindow.h -o moc_mainwindow.cpp
+
+moc_rating.cpp: ../../rating.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QHBoxLayout \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qboxlayout.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QLayout \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qlayout.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../../Qt/6.7.0/macos/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QEvent \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qcoreevent.h \
+		../../../Qt/6.7.0/macos/libexec/moc
+	/Users/haha/Qt/6.7.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/haha/Qt/6.7.0/macos/mkspecs/macx-clang -I/Users/haha/FindRestaurantAroundPKU -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickWidgets.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtLocation.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtPositioningQuick.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickShapes.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickShapes.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickShapes.framework/Versions/A/Headers/6.7.0/QtQuickShapes -I/Users/haha/Qt/6.7.0/macos/lib/QtQuick.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQuick.framework/Versions/A/Headers/6.7.0/QtQuick -I/Users/haha/Qt/6.7.0/macos/lib/QtQuick.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtOpenGL.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtWidgets.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtGui.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtGui.framework/Versions/A/Headers/6.7.0/QtGui -I/Users/haha/Qt/6.7.0/macos/lib/QtGui.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQmlModels.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQmlModels.framework/Versions/A/Headers/6.7.0/QtQmlModels -I/Users/haha/Qt/6.7.0/macos/lib/QtQmlModels.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQml.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQml.framework/Versions/A/Headers/6.7.0/QtQml -I/Users/haha/Qt/6.7.0/macos/lib/QtQml.framework/Headers -I/Users/haha/Qt/6.7.0/macos/include -I/Users/haha/Qt/6.7.0/macos/include/QtQmlIntegration -I/Users/haha/Qt/6.7.0/macos/lib/QtNetwork.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtPositioning.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtCore.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtCore.framework/Versions/A/Headers/6.7.0/QtCore -I/Users/haha/Qt/6.7.0/macos/lib/QtCore.framework/Headers -I/Users/haha/Qt/6.7.0/macos/include/QtQmlBuiltins/6.7.0 -I/Users/haha/Qt/6.7.0/macos/include/QtQmlBuiltins/6.7.0/QtQmlBuiltins -I/Users/haha/Qt/6.7.0/macos/include/QtQmlBuiltins -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/haha/Qt/6.7.0/macos/lib ../../rating.h -o moc_rating.cpp
+
+moc_ratingbutton.cpp: ../../ratingbutton.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt/6.7.0/macos/libexec/moc
+	/Users/haha/Qt/6.7.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/haha/Qt/6.7.0/macos/mkspecs/macx-clang -I/Users/haha/FindRestaurantAroundPKU -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickWidgets.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtLocation.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtPositioningQuick.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickShapes.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickShapes.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQuickShapes.framework/Versions/A/Headers/6.7.0/QtQuickShapes -I/Users/haha/Qt/6.7.0/macos/lib/QtQuick.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQuick.framework/Versions/A/Headers/6.7.0/QtQuick -I/Users/haha/Qt/6.7.0/macos/lib/QtQuick.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtOpenGL.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtWidgets.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtGui.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtGui.framework/Versions/A/Headers/6.7.0/QtGui -I/Users/haha/Qt/6.7.0/macos/lib/QtGui.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQmlModels.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQmlModels.framework/Versions/A/Headers/6.7.0/QtQmlModels -I/Users/haha/Qt/6.7.0/macos/lib/QtQmlModels.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtQml.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtQml.framework/Versions/A/Headers/6.7.0/QtQml -I/Users/haha/Qt/6.7.0/macos/lib/QtQml.framework/Headers -I/Users/haha/Qt/6.7.0/macos/include -I/Users/haha/Qt/6.7.0/macos/include/QtQmlIntegration -I/Users/haha/Qt/6.7.0/macos/lib/QtNetwork.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtPositioning.framework/Headers -I/Users/haha/Qt/6.7.0/macos/lib/QtCore.framework/Versions/A/Headers/6.7.0 -I/Users/haha/Qt/6.7.0/macos/lib/QtCore.framework/Versions/A/Headers/6.7.0/QtCore -I/Users/haha/Qt/6.7.0/macos/lib/QtCore.framework/Headers -I/Users/haha/Qt/6.7.0/macos/include/QtQmlBuiltins/6.7.0 -I/Users/haha/Qt/6.7.0/macos/include/QtQmlBuiltins/6.7.0/QtQmlBuiltins -I/Users/haha/Qt/6.7.0/macos/include/QtQmlBuiltins -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/haha/Qt/6.7.0/macos/lib ../../ratingbutton.h -o moc_ratingbutton.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1009,14 +1065,31 @@ indexes.o: ../../indexes.cpp ../../indexes.h \
 		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QComboBox \
 		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qcombobox.h \
 		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QListWidget \
-		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qlistwidget.h
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qlistwidget.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QMap \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qmap.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o indexes.o ../../indexes.cpp
 
 inference.o: ../../inference.cpp ../../inference.h \
 		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
 		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		../../indexes.h \
 		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QWidget \
-		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qwidget.h
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QVBoxLayout \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qboxlayout.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QComboBox \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qcombobox.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QListWidget \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qlistwidget.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QMap \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qmap.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qstringlist.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o inference.o ../../inference.cpp
 
 locationmanager.o: ../../locationmanager.cpp ../../LocationManager.h \
@@ -1043,7 +1116,8 @@ main.o: ../../main.cpp ../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/Q
 		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
 		../../locationmanager.h \
 		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QVariant \
-		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qvariant.h
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qvariant.h \
+		../../ratingbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
@@ -1051,6 +1125,39 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
+
+rating.o: ../../rating.cpp ../../rating.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QHBoxLayout \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qboxlayout.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QLayout \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qlayout.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../../Qt/6.7.0/macos/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QEvent \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qcoreevent.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rating.o ../../rating.cpp
+
+ratingbutton.o: ../../ratingbutton.cpp ../../ratingbutton.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		../../rating.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QHBoxLayout \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qboxlayout.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QLayout \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qlayout.h \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../../Qt/6.7.0/macos/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/QEvent \
+		../../../Qt/6.7.0/macos/lib/QtCore.framework/Headers/qcoreevent.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ratingbutton.o ../../ratingbutton.cpp
 
 qrc_image.o: qrc_image.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_image.o qrc_image.cpp
@@ -1063,6 +1170,12 @@ qrc_image3.o: qrc_image3.cpp
 
 qrc_image4.o: qrc_image4.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_image4.o qrc_image4.cpp
+
+qrc_image5.o: qrc_image5.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_image5.o qrc_image5.cpp
+
+qrc_image6.o: qrc_image6.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_image6.o qrc_image6.cpp
 
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp
@@ -1078,6 +1191,12 @@ moc_locationmanager.o: moc_locationmanager.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_rating.o: moc_rating.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_rating.o moc_rating.cpp
+
+moc_ratingbutton.o: moc_ratingbutton.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ratingbutton.o moc_ratingbutton.cpp
 
 ####### Install
 

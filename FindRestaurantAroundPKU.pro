@@ -13,13 +13,17 @@ SOURCES += \
     inference.cpp \
     locationmanager.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    rating.cpp \
+    ratingbutton.cpp
 
 HEADERS += \
     indexes.h \
     inference.h \
     locationmanager.h \
-    mainwindow.h
+    mainwindow.h \
+    rating.h \
+    ratingbutton.h
 
 FORMS += \
     mainwindow.ui
@@ -34,4 +38,6 @@ RESOURCES += \
     image2.qrc \
     image3.qrc \
     image4.qrc \
+    image5.qrc \
+    image6.qrc \
     qml.qrc

@@ -2,6 +2,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
+import rating.example
 
 Item {
     id: infoWindow
@@ -30,12 +31,24 @@ Item {
             Text { text: " " + infoWindow.locationName }
             Text { text: " 描述: " + infoWindow.description }
             Text { text: " 类别: " + infoWindow.category }
-            Text { text: " 评分: " + infoWindow.rating }
+            RowLayout {
+                            Text { text: " 评分: " + infoWindow.rating }
+                            Button {
+                                text: "我要评分"
+                                onClicked: {
+                                    myratingbutton.showRating()
+                                }
+                                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                            }
+            }
             Text { text: " 离东门: " + infoWindow.distance_to_EastDoor + " m" }
             Text { text: " 离西门: " + infoWindow.distance_to_WestDoor + " m" }
             Text { text: " 离南门: " + infoWindow.distance_to_SouthDoor + " m"}
             Text { text: " 离东南门: " + infoWindow.distance_to_SouthEastDoor + " m" }
             Text { text: " 离西南门: " + infoWindow.distance_to_SouthWestDoor + " m" }
         }
+
     }
+
 }
+

@@ -6,6 +6,7 @@ import QtLocation 5.15
 import QtPositioning 5.15
 import com.example
 import inference.example
+import rating.example
 
 ApplicationWindow {
     visible: true
