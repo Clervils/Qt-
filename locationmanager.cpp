@@ -50,9 +50,22 @@ void LocationManager::updateLocationRating(int rating, const QString &name)
 {
     for (auto &location : m_locations) {
         if (location["name"].toString() == name) {
-            location["rating"] = ((location["rating"].toInt())*(location["num_of_rating"].toInt()) + rating)/(location["num_of_rating"].toInt() + 1);
-            location["num_of_rating"] = location["num_of_rating"].toInt() + 1;
-            qDebug() << "更新" << name << "的评分为" << rating;
+            double currentRating = location["rating"].toDouble();
+            int numOfRatings = location["num_of_rating"].toInt();
+
+            // 计算新的评分
+            double newTotalRating = currentRating * numOfRatings + rating;
+            int newNumOfRatings = numOfRatings + 1;
+            double newAverageRating = newTotalRating / newNumOfRatings;
+
+            // 保留一位小数
+            newAverageRating = round(newAverageRating * 10) / 10.0;
+
+            // 更新位置的评分和评分次数
+            location["rating"] = newAverageRating;
+            location["num_of_rating"] = newNumOfRatings;
+
+            qDebug() << "更新" << name << "的评分为" << newAverageRating;
             break;
         }
     }
