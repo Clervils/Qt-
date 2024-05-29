@@ -50,7 +50,8 @@ void LocationManager::updateLocationRating(int rating, const QString &name)
 {
     for (auto &location : m_locations) {
         if (location["name"].toString() == name) {
-            location["rating"] = rating;
+            location["rating"] = ((location["rating"].toInt())*(location["num_of_rating"].toInt()) + rating)/(location["num_of_rating"].toInt() + 1);
+            location["num_of_rating"] = location["num_of_rating"].toInt() + 1;
             qDebug() << "更新" << name << "的评分为" << rating;
             break;
         }
