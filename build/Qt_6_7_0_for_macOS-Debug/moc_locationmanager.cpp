@@ -39,13 +39,15 @@ constexpr auto qt_meta_stringdata_CLASSLocationManagerENDCLASS = QtMocHelpers::s
     "locationClicked",
     "",
     "location",
-    "addLocation",
+    "updateLocationRating",
+    "rating",
     "name",
+    "addLocation",
     "latitude",
     "longitude",
     "description",
     "category",
-    "rating",
+    "num_of_rating",
     "getAllLocations",
     "getLocationByName"
 );
@@ -60,7 +62,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSLocationManagerENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -68,20 +70,26 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSLocationManagerENDCLASS[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   38,    2, 0x06,    1 /* Public */,
+       1,    1,   44,    2, 0x06,    1 /* Public */,
+
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+       4,    2,   47,    2, 0x0a,    3 /* Public */,
 
  // methods: name, argc, parameters, tag, flags, initial metatype offsets
-       4,    6,   41,    2, 0x02,    3 /* Public */,
-      11,    0,   54,    2, 0x102,   10 /* Public | MethodIsConst  */,
-      12,    1,   55,    2, 0x102,   11 /* Public | MethodIsConst  */,
+       7,    7,   52,    2, 0x02,    6 /* Public */,
+      13,    0,   67,    2, 0x102,   14 /* Public | MethodIsConst  */,
+      14,    1,   68,    2, 0x102,   15 /* Public | MethodIsConst  */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QVariantMap,    3,
 
+ // slots: parameters
+    QMetaType::Void, QMetaType::Int, QMetaType::QString,    5,    6,
+
  // methods: parameters
-    QMetaType::Void, QMetaType::QString, QMetaType::QReal, QMetaType::QReal, QMetaType::QString, QMetaType::QString, QMetaType::Int,    5,    6,    7,    8,    9,   10,
+    QMetaType::Void, QMetaType::QString, QMetaType::QReal, QMetaType::QReal, QMetaType::QString, QMetaType::QString, QMetaType::Int, QMetaType::Int,    6,    8,    9,   10,   11,    5,   12,
     QMetaType::QVariantList,
-    QMetaType::QVariantMap, QMetaType::QString,    5,
+    QMetaType::QVariantMap, QMetaType::QString,    6,
 
        0        // eod
 };
@@ -98,6 +106,10 @@ Q_CONSTINIT const QMetaObject LocationManager::staticMetaObject = { {
         // method 'locationClicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QVariantMap &, std::false_type>,
+        // method 'updateLocationRating'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
         // method 'addLocation'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
@@ -105,6 +117,7 @@ Q_CONSTINIT const QMetaObject LocationManager::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<qreal, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'getAllLocations'
         QtPrivate::TypeAndForceComplete<QVariantList, std::false_type>,
@@ -122,10 +135,11 @@ void LocationManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         (void)_t;
         switch (_id) {
         case 0: _t->locationClicked((*reinterpret_cast< std::add_pointer_t<QVariantMap>>(_a[1]))); break;
-        case 1: _t->addLocation((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<qreal>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<qreal>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[6]))); break;
-        case 2: { QVariantList _r = _t->getAllLocations();
+        case 1: _t->updateLocationRating((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 2: _t->addLocation((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<qreal>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<qreal>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[6])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[7]))); break;
+        case 3: { QVariantList _r = _t->getAllLocations();
             if (_a[0]) *reinterpret_cast< QVariantList*>(_a[0]) = std::move(_r); }  break;
-        case 3: { QVariantMap _r = _t->getLocationByName((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
+        case 4: { QVariantMap _r = _t->getLocationByName((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
             if (_a[0]) *reinterpret_cast< QVariantMap*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
@@ -160,13 +174,13 @@ int LocationManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

@@ -24,6 +24,8 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonInstance("inference.example", 1, 0, "Inference", &myInference);
     qmlRegisterSingletonInstance("rating.example", 1, 0, "Ratingbutton", &myratingbutton);
 
+    QObject::connect(&myratingbutton, &Ratingbutton::ratingUpdated, &locationManager, &LocationManager::updateLocationRating);
+
     // 加载主 QML 文件
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("locationManager", &locationManager);

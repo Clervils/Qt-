@@ -1,17 +1,18 @@
 // LocationManager.cpp
 
-#include "LocationManager.h"
+#include "locationmanager.h"
 
 
 LocationManager::LocationManager(QObject *parent) : QObject(parent)
 {
     // 初始化地点信息
-    addLocation("Point A", 39.9917, 116.3055, "This is Point A", "Restaurant", 4);
-    addLocation("Point B", 39.995, 116.31, "This is Point B", "Cafe", 5);
+    addLocation("Point A", 39.9917, 116.3055, "This is Point A", "Restaurant", 4, 1);
+    addLocation("Point B", 39.995, 116.31, "This is Point B", "Cafe", 5, 2);
+    addLocation("Point C", 39.997862, 116.320524, "hahha", "ha", 5, 1);
     // 添加更多地点信息
 }
 //餐馆名，经纬度，餐馆描述，类别，评分
-void LocationManager::addLocation(const QString &name, qreal latitude, qreal longitude, const QString &description, const QString &category, int rating)
+void LocationManager::addLocation(const QString &name, qreal latitude, qreal longitude, const QString &description, const QString &category, int rating, int num_of_rating)
 {
     QVariantMap location;
     location["name"] = name;
@@ -20,6 +21,7 @@ void LocationManager::addLocation(const QString &name, qreal latitude, qreal lon
     location["description"] = description;
     location["category"] = category;
     location["rating"] = rating;
+    location["num_of_rating"] = num_of_rating;
     m_locations.append(location);
 }
 
@@ -43,5 +45,15 @@ QVariantMap LocationManager::getLocationByName(const QString &name) const
 
     qDebug() << "Location not found for name:" << name;
     return QVariantMap();
+}
+void LocationManager::updateLocationRating(int rating, const QString &name)
+{
+    for (auto &location : m_locations) {
+        if (location["name"].toString() == name) {
+            location["rating"] = rating;
+            qDebug() << "更新" << name << "的评分为" << rating;
+            break;
+        }
+    }
 }
 

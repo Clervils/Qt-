@@ -2,6 +2,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
+import com.example
 import rating.example
 
 Item {
@@ -67,7 +68,8 @@ Item {
                 Button {
                         text: "我要评分"
                         onClicked: {
-                            myratingbutton.showRating()
+                            myratingbutton.showRating(infoWindow.locationName)
+                            locationManager.updateRating(myratingbutton.ratingnum, infoWindow.locationName)
                         }
                         Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                 }
@@ -86,6 +88,15 @@ Item {
         }
 
     }
+    Connections {
+            target: myratingbutton
+            onRatingUpdated: {
+                // 在评分更新后执行位置管理器的更新操作
+                console.log(myratingbutton.ratingnum)
+                locationManager.updateRating(myratingbutton.ratingnum, infoWindow.locationName)
+            }
+        }
+
 
 }
 

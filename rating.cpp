@@ -1,6 +1,8 @@
+// rating.cpp
+
 #include "rating.h"
 
-RatingWidget::RatingWidget(QWidget *parent) : QWidget(parent)
+RatingWidget::RatingWidget(QString name, QWidget *parent) : QWidget(parent)
 {
     layout = new QHBoxLayout(this);
     layout->setSpacing(0);
@@ -14,17 +16,15 @@ RatingWidget::RatingWidget(QWidget *parent) : QWidget(parent)
         layout->addWidget(starLabel);
         starLabels.append(starLabel);
     }
-
+    locname = name;
 
     currentRating = 0;
-
-
 }
 
 void RatingWidget::mousePressEvent(QMouseEvent *event)
 {
     int starWidth = width() / 5;
-    int rating = event->position().x() / starWidth + 1; // 计算当前鼠标点击位置所代表的评分
+    int rating = event->position().x() / starWidth + 1;
 
     updateRating(rating);
 }
@@ -38,15 +38,19 @@ void RatingWidget::updateRating(int rating)
             if (i < rating) {
                 QPixmap starPixmap(":/ratingstar2.jpg");
                 starPixmap = starPixmap.scaled(40, 40, Qt::KeepAspectRatio);
-                starLabels[i]->setPixmap(starPixmap); // 设置已选中状态的星星
+                starLabels[i]->setPixmap(starPixmap);
             } else {
                 QPixmap starPixmap(":/ratingstar.jpg");
                 starPixmap = starPixmap.scaled(40, 40, Qt::KeepAspectRatio);
                 starLabels[i]->setPixmap(starPixmap);
-                starLabels[i]->setPixmap(QPixmap(starPixmap)); // 设置未选中状态的星星
             }
         }
-
-        //补充与数据库的交互
+        emit ratingChanged(currentRating);
     }
+}
+
+void RatingWidget::closeEvent(QCloseEvent *event)
+{
+    emit ratingClosed(currentRating, locname);
+    QWidget::closeEvent(event);
 }

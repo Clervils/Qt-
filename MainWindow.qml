@@ -105,6 +105,7 @@ ApplicationWindow {
                 model: ListModel {
                     ListElement { name: "Point A"; latitude: 39.9917; longitude: 116.3055 }
                     ListElement { name: "Point B"; latitude: 39.995; longitude: 116.31 }
+                    ListElement { name: "Point C"; latitude: 39.997862; longitude: 116.320524 }
                     // 添加更多点的名称和坐标,通过经纬度定位（还需要在locationManager.cpp中添加信息
                 }
 
@@ -119,9 +120,11 @@ ApplicationWindow {
                             sourceSize.width: 20 // 设置图像宽度为20像素
                             sourceSize.height: 20 // 设置图像高度为20像素
 
+
                     }
 
                     property var infoWindow; // 将infoWindow声明为属性
+
 
                     MouseArea {
                         anchors.fill: parent
