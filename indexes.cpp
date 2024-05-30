@@ -2,7 +2,46 @@
 
 #include "indexes.h"
 #include <QDebug>
+#include<algorithm>
+#include<iostream>
+#include "locationmanager.h"
+bool comparebywest(const QString &a, const QString &b) {
+    LocationManager l;
+    return l.getLocationByName(a)["towest"].toDouble()<l.getLocationByName(b)["towest"].toDouble();
+    //return a < b;  // 按字母顺序排序
+}
+bool comparebyeast(const QString &a, const QString &b) {
+    LocationManager l;
+    return l.getLocationByName(a)["toeast"].toDouble()<l.getLocationByName(b)["toeast"].toDouble();
+    //return a < b;  // 按字母顺序排序
+}
+bool comparebysouth(const QString &a, const QString &b) {
+    LocationManager l;
+    return l.getLocationByName(a)["tosouth"].toDouble()<l.getLocationByName(b)["tosouth"].toDouble();
+    //return a < b;  // 按字母顺序排序
+}
+bool comparebysouthwest(const QString &a, const QString &b) {
+    LocationManager l;
+    return l.getLocationByName(a)["tosouthwest"].toDouble()<l.getLocationByName(b)["tosouthwest"].toDouble();
+    //return a < b;  // 按字母顺序排序
+}
+bool comparebysoutheast(const QString &a, const QString &b) {
+    LocationManager l;
+    return l.getLocationByName(a)["tosoutheast"].toDouble()<l.getLocationByName(b)["tosoutheast"].toDouble();
+    //return a < b;  // 按字母顺序排序
+}
+bool comparebyrate(const QString &a, const QString &b) {
+    LocationManager l;
+    return l.getLocationByName(a)["rating"].toDouble()>l.getLocationByName(b)["rating"].toDouble();
+    //return a < b;  // 按字母顺序排序
+}
+QStringList getSortedData(const QString &category, bool (*compareFunc)(const QString&, const QString&)) {
+    LocationManager l;
+    QStringList sortedList=l.getLocationsByCategory(category);
+    std::sort(sortedList.begin(), sortedList.end(), compareFunc);
 
+    return sortedList;
+}
 Indexes::Indexes(QWidget *parent) : QWidget(parent) {
     setWindowTitle("排行榜");
     resize(500, 400);
@@ -47,83 +86,47 @@ Indexes::Indexes(QWidget *parent) : QWidget(parent) {
 void Indexes::initializeData() {
     // *在此处实现按照分类的分数和距离排名
 
-    QStringList category1ScoreRank = {"A", "B", "C", "D", "E"};
-    QStringList category2ScoreRank = {"BB", "CC", "AA", "DD", "EE"};
-    QStringList category3ScoreRank = {"AAA", "CCC", "DDD", "EEE", "FFF"};
-    QStringList category4ScoreRank = {"AAA", "CCC", "DDD", "EEE", "FFF"};
-    QStringList category5ScoreRank = {"AAA", "CCC", "DDD", "EEE", "FFF"};
-    QStringList category6ScoreRank = {"AAA", "CCC", "DDD", "EEE", "FFF"};
-    rankData["按分数排序"]["奶茶咖啡"] = category1ScoreRank;
-    rankData["按分数排序"]["快餐"] = category2ScoreRank;
-    rankData["按分数排序"]["包子粥店"] = category3ScoreRank;
-    rankData["按分数排序"]["米粉面馆"] = category4ScoreRank;
-    rankData["按分数排序"]["地方菜系"] = category5ScoreRank;
-    rankData["按分数排序"]["火锅烧烤"] = category6ScoreRank;
+    rankData["按分数排序"]["奶茶咖啡"] = getSortedData("奶茶咖啡",comparebyrate);
+    rankData["按分数排序"]["快餐"] =getSortedData("快餐",comparebyrate);
+    rankData["按分数排序"]["包子粥店"] = getSortedData("包子粥店",comparebyrate);
+    rankData["按分数排序"]["米粉面馆"] = getSortedData("米粉面馆",comparebyrate);
+    rankData["按分数排序"]["地方菜系"] = getSortedData("地方菜系",comparebyrate);
+    rankData["按分数排序"]["火锅烧烤"] =getSortedData("火锅烧烤",comparebyrate);
 
-    QStringList category11DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category12DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category13DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category14DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category15DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category16DistanceRank = {"A", "C", "B", "D", "E"};
-    rankData["按到东门距离排序"]["奶茶咖啡"] = category11DistanceRank;
-    rankData["按到东门距离排序"]["快餐"] = category12DistanceRank;
-    rankData["按到东门距离排序"]["包子粥店"] = category13DistanceRank;
-    rankData["按到东门距离排序"]["米粉面馆"] = category14DistanceRank;
-    rankData["按到东门距离排序"]["地方菜系"] = category15DistanceRank;
-    rankData["按到东门距离排序"]["火锅烧烤"] = category16DistanceRank;
+    rankData["按到东门距离排序"]["奶茶咖啡"] = getSortedData("奶茶咖啡",comparebyeast);
+    rankData["按到东门距离排序"]["快餐"] = getSortedData("快餐",comparebyeast);
+    rankData["按到东门距离排序"]["包子粥店"] = getSortedData("包子粥店",comparebyeast);
+    rankData["按到东门距离排序"]["米粉面馆"] = getSortedData("米粉面馆",comparebyeast);
+    rankData["按到东门距离排序"]["地方菜系"] = getSortedData("地方菜系",comparebyeast);
+    rankData["按到东门距离排序"]["火锅烧烤"] = getSortedData("火锅烧烤",comparebyeast);
 
-    QStringList category21DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category22DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category23DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category24DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category25DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category26DistanceRank = {"A", "C", "B", "D", "E"};
-    rankData["按到西门距离排序"]["奶茶咖啡"] = category21DistanceRank;
-    rankData["按到西门距离排序"]["快餐"] = category22DistanceRank;
-    rankData["按到西门距离排序"]["包子粥店"] = category23DistanceRank;
-    rankData["按到西门距离排序"]["米粉面馆"] = category24DistanceRank;
-    rankData["按到西门距离排序"]["地方菜系"] = category25DistanceRank;
-    rankData["按到西门距离排序"]["火锅烧烤"] = category26DistanceRank;
+    rankData["按到西门距离排序"]["奶茶咖啡"] = getSortedData("奶茶咖啡",comparebywest);
+    rankData["按到西门距离排序"]["快餐"] = getSortedData("快餐",comparebywest);
+    rankData["按到西门距离排序"]["包子粥店"] = getSortedData("包子粥店",comparebywest);
+    rankData["按到西门距离排序"]["米粉面馆"] = getSortedData("米粉面馆",comparebywest);
+    rankData["按到西门距离排序"]["地方菜系"] = getSortedData("地方菜系",comparebywest);
+    rankData["按到西门距离排序"]["火锅烧烤"] = getSortedData("火锅烧烤",comparebywest);
 
-    QStringList category31DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category32DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category33DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category34DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category35DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category36DistanceRank = {"A", "C", "B", "D", "E"};
-    rankData["按到南门距离排序"]["奶茶咖啡"] = category31DistanceRank;
-    rankData["按到南门距离排序"]["快餐"] = category32DistanceRank;
-    rankData["按到南门距离排序"]["包子粥店"] = category33DistanceRank;
-    rankData["按到南门距离排序"]["米粉面馆"] = category34DistanceRank;
-    rankData["按到南门距离排序"]["地方菜系"] = category35DistanceRank;
-    rankData["按到南门距离排序"]["火锅烧烤"] = category36DistanceRank;
+    rankData["按到南门距离排序"]["奶茶咖啡"] = getSortedData("奶茶咖啡",comparebysouth);
+    rankData["按到南门距离排序"]["快餐"] = getSortedData("快餐",comparebysouth);
+    rankData["按到南门距离排序"]["包子粥店"] = getSortedData("包子粥店",comparebysouth);
+    rankData["按到南门距离排序"]["米粉面馆"] = getSortedData("米粉面馆",comparebysouth);
+    rankData["按到南门距离排序"]["地方菜系"] = getSortedData("地方菜系",comparebysouth);
+    rankData["按到南门距离排序"]["火锅烧烤"] = getSortedData("火锅烧烤",comparebysouth);
 
-    QStringList category41DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category42DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category43DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category44DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category45DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category46DistanceRank = {"A", "C", "B", "D", "E"};
-    rankData["按到东南门距离排序"]["奶茶咖啡"] = category41DistanceRank;
-    rankData["按到东南门距离排序"]["快餐"] = category42DistanceRank;
-    rankData["按到东南门距离排序"]["包子粥店"] = category43DistanceRank;
-    rankData["按到东南门距离排序"]["米粉面馆"] = category44DistanceRank;
-    rankData["按到东南门距离排序"]["地方菜系"] = category45DistanceRank;
-    rankData["按到东南门距离排序"]["火锅烧烤"] = category46DistanceRank;
+    rankData["按到东南门距离排序"]["奶茶咖啡"] = getSortedData("奶茶咖啡",comparebysoutheast);
+    rankData["按到东南门距离排序"]["快餐"] = getSortedData("快餐",comparebysoutheast);
+    rankData["按到东南门距离排序"]["包子粥店"] = getSortedData("包子粥店",comparebysoutheast);
+    rankData["按到东南门距离排序"]["米粉面馆"] = getSortedData("米粉面馆",comparebysoutheast);
+    rankData["按到东南门距离排序"]["地方菜系"] = getSortedData("地方菜系",comparebysoutheast);
+    rankData["按到东南门距离排序"]["火锅烧烤"] = getSortedData("火锅烧烤",comparebysoutheast);
 
-    QStringList category51DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category52DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category53DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category54DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category55DistanceRank = {"A", "C", "B", "D", "E"};
-    QStringList category56DistanceRank = {"A", "C", "B", "D", "E"};
-    rankData["按到西南门距离排序"]["奶茶咖啡"] = category51DistanceRank;
-    rankData["按到西南门距离排序"]["快餐"] = category52DistanceRank;
-    rankData["按到西南门距离排序"]["包子粥店"] = category53DistanceRank;
-    rankData["按到西南门距离排序"]["米粉面馆"] = category54DistanceRank;
-    rankData["按到西南门距离排序"]["地方菜系"] = category55DistanceRank;
-    rankData["按到西南门距离排序"]["火锅烧烤"] = category56DistanceRank;
+    rankData["按到西南门距离排序"]["奶茶咖啡"] = getSortedData("奶茶咖啡",comparebysouthwest);
+    rankData["按到西南门距离排序"]["快餐"] = getSortedData("快餐",comparebysouthwest);
+    rankData["按到西南门距离排序"]["包子粥店"] = getSortedData("包子粥店",comparebysouthwest);
+    rankData["按到西南门距离排序"]["米粉面馆"] = getSortedData("米粉面馆",comparebysouthwest);
+    rankData["按到西南门距离排序"]["地方菜系"] = getSortedData("地方菜系",comparebysouthwest);
+    rankData["按到西南门距离排序"]["火锅烧烤"] = getSortedData("火锅烧烤",comparebysouthwest);
 
 
     // 更多排名数据可以在这里添加

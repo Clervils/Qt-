@@ -1,5 +1,14 @@
 <RCC>
     <qresource prefix="/">
         <file>restaurant.png</file>
+        <file>baozi.png</file>
+        <file>coffee.png</file>
+        <file>hotpot.png</file>
+        <file>R-C.png</file>
+        <file>Gate.png</file>
+        <file>south.png</file>
+        <file>search.png</file>
+        <file>noodles.png</file>
+        <file>dd.png</file>
     </qresource>
 </RCC>

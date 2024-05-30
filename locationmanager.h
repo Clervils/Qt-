@@ -21,6 +21,8 @@ public:
     // 根据名称获取地点信息
     Q_INVOKABLE QVariantMap getLocationByName(const QString &name) const;
 
+    Q_INVOKABLE QStringList getLocationsByCategory(const QString &category) const;
+
 public slots:
     // 更新地点评分
     void updateLocationRating(int rating, const QString &name);

@@ -41,3 +41,16 @@ RESOURCES += \
     image5.qrc \
     image6.qrc \
     qml.qrc
+
+DISTFILES += \
+    Gate.png \
+    R-C.png \
+    baozi.png \
+    coffee.png \
+    dd.png \
+    hotpot.png \
+    noodle.jpg \
+    noodles.png \
+    quick.jpg \
+    search.png \
+    south.png
