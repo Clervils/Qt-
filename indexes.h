@@ -17,14 +17,17 @@ public:
 
 public slots:
     void updateRank();
+    void chooseCategoryAndRandom();
+    void showDetailedInfo(const QString &restaurantName);
 
 private:
     void initializeData();
-
+    QString findNearestGate(const QMap<QString, QVariant> &locationDetails);
     QComboBox *comboBoxRank;
     QComboBox *comboBoxCategory;
     QListWidget *rankList;
     QMap<QString, QMap<QString, QStringList>> rankData;
+
 };
 
 #endif // INDEXES_H
