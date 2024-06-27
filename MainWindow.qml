@@ -111,6 +111,10 @@ ApplicationWindow {
                     ListElement{name:"花小小新疆炒米粉"; latitude:39.997892; longitude:116.330636}
                     ListElement{name:"和府捞面"; latitude:39.984361; longitude:116.322492}
                     ListElement{name:"遇见小面"; latitude:39.984098; longitude:116.321836}
+                    ListElement{name:"丝路伊兰牛肉面"; latitude:39.99216; longitude:116.32438}
+                    ListElement{name:"面乡山西刀削面"; latitude:39.98438; longitude:116.30485}
+                    ListElement{name:"三泉冷面"; latitude:39.98312; longitude:116.31331}
+                    ListElement{name:"西部马华牛肉面"; latitude:39.98218; longitude:116.30704}
                     // 添加更多点的名称和坐标,通过经纬度定位（还需要在locationManager.cpp中添加信息
                 }
 
@@ -262,6 +266,17 @@ ApplicationWindow {
                     ListElement{name:"霸王茶姬"; latitude:39.984355; longitude:116.32229}
                     ListElement{name:"茶百道"; latitude:39.98958; longitude:116.323669}
                     ListElement{name:"瑞幸咖啡"; latitude:39.990546; longitude:116.319749}
+                    ListElement{name:"CoCo都可"; latitude:39.97817; longitude:116.31619}
+                    ListElement{name:"一点点"; latitude:39.97825; longitude:116.31551}
+                    ListElement{name:"Manner Coffee"; latitude:39.98224; longitude:116.30726}
+                    ListElement{name:"茉酸奶"; latitude:39.97829; longitude:116.31559}
+                    ListElement{name:"宝珠奶酪"; latitude:39.97920; longitude:116.31431}
+                    ListElement{name:"茶颜观色"; latitude:39.99249; longitude:116.33485}
+                    ListElement{name:"茶话弄"; latitude:39.97817; longitude:116.31569}
+                    ListElement{name:"LINLEE林里手打柠檬茶"; latitude:39.97918; longitude:116.31477}
+                    ListElement{name:"兰熊鲜奶"; latitude:39.98284; longitude:116.31324}
+                    ListElement{name:"蜜雪冰城"; latitude:39.98273; longitude:116.31271}
+                    ListElement{name:"奈雪的茶"; latitude:39.98270; longitude:116.31313}
                     // 添加更多点的名称和坐标,通过经纬度定位（还需要在locationManager.cpp中添加信息
                 }
 
@@ -414,6 +429,16 @@ ApplicationWindow {
                     ListElement{name:"锦府盐帮·李宅"; latitude:39.985264; longitude:116.320885}
                     ListElement{name:"汇贤府·李氏鲁菜"; latitude:39.976791; longitude:116.321839}
                     ListElement{name:"港丽餐厅"; latitude:39.98525; longitude:116.320653}
+                    ListElement{name:"九龙冰室"; latitude:39.97813; longitude:116.31512}
+                    ListElement{name:"新扎兄弟冰室"; latitude:39.99224; longitude:116.33944}
+                    ListElement{name:"蔡澜点心"; latitude:39.97309; longitude:116.29543}
+                    ListElement{name:"潇湘阁"; latitude:39.98300; longitude:116.31308}
+                    ListElement{name:"湘了个西"; latitude:39.98420; longitude:116.30403}
+                    ListElement{name:"越恰越湘"; latitude:39.98096; longitude:116.31838}
+                    ListElement{name:"嬲塞de湘菜馆"; latitude:39.99361; longitude:116.33862}
+                    ListElement{name:"老蜀人"; latitude:39.98635; longitude:116.31294}
+                    ListElement{name:"先启半步癫"; latitude:39.98442; longitude:116.30595}
+                    ListElement{name:"泸州幺妹私房菜"; latitude:39.98438; longitude:116.30413}
                     // 添加更多点的名称和坐标,通过经纬度定位（还需要在locationManager.cpp中添加信息
                 }
 
@@ -489,6 +514,13 @@ ApplicationWindow {
                     ListElement{name:"火炉火自助餐"; latitude:39.984307; longitude:116.321328}
                     ListElement{name:"翅客烧烤"; latitude:39.991883; longitude:116.316974}
                     ListElement{name:"巴奴毛肚火锅"; latitude:39.9842; longitude:116.322371}
+                    ListElement{name:"锦上源江南烤肉"; latitude:39.985073; longitude:116.327918}
+                    ListElement{name:"炉鱼潮州牛肉火锅"; latitude:39.98815; longitude:116.327933}
+                    ListElement{name:"牛炮锅"; latitude:39.973999; longitude:116.323325}
+                    ListElement{name:"木屋烧烤"; latitude:39.97551; longitude:116.31322}
+                    ListElement{name:"麦家小馆"; latitude:39.98271; longitude:116.30533}
+                    ListElement{name:"聚点串吧"; latitude:39.98165; longitude:116.31416}
+                    ListElement{name:"丰茂烤串"; latitude:39.99318; longitude:116.33639}
                     // 添加更多点的名称和坐标,通过经纬度定位（还需要在locationManager.cpp中添加信息
                 }
 
